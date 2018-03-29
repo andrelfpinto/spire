@@ -116,6 +116,19 @@ lazy val core = crossProject.crossType(CrossType.Pure)
 lazy val coreJVM = core.jvm
 lazy val coreJS = core.js
 
+lazy val stats = crossProject.crossType(CrossType.Pure)
+  .settings(moduleName := "spire-stats")
+  .settings(spireSettings:_*)
+  .settings(coreSettings:_*)
+  .settings(crossVersionSharedSources:_*)
+  .enablePlugins(BuildInfoPlugin)
+  .jvmSettings(commonJvmSettings:_*)
+  .jsSettings(commonJsSettings:_*)
+  .dependsOn(macros, platform, util, core, data)
+
+lazy val statsJVM = stats.jvm
+lazy val statsJS = stats.js
+
 lazy val extras = crossProject.crossType(CrossType.Pure)
   .settings(moduleName := "spire-extras")
   .settings(spireSettings:_*)
